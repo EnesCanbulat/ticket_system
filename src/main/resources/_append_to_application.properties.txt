@@ -1,0 +1,4 @@
+# Add to application.properties (or application-dev.properties)
+management.endpoints.web.exposure.include=health,info,mappings
+# Optional: disable whitelabel error page
+# server.error.whitelabel.enabled=false

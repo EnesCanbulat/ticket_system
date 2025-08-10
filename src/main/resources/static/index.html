@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <title>Ticket System Backend</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; margin: 2rem; }
+    code, a { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    ul { line-height: 1.8; }
+    .note { background:#f6f8fa; border:1px solid #d0d7de; padding:1rem; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <h1>Ticket System Backend</h1>
+  <p>Uygulama ayakta. Hızlı bağlantılar:</p>
+  <ul>
+    <li><a href="/api/ping">/api/ping</a></li>
+    <li><a href="/api/utility/health">/api/utility/health</a></li>
+    <li><a href="/actuator/health">/actuator/health</a> (Actuator açıksa)</li>
+    <li><a href="/actuator/mappings">/actuator/mappings</a> (Endpoint listesi)</li>
+  </ul>
+  <div class="note">
+    <strong>Not:</strong> Eğer <code>server.servlet.context-path=/api</code> ayarlıysa, bu sayfaya <code>http://localhost:8080/api/</code> üzerinden erişirsiniz.
+  </div>
+</body>
+</html>
