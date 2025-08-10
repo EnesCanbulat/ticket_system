@@ -1,0 +1,988 @@
+{
+	"info": {
+		"_postman_id": "95e6c48e-aee4-46e9-bc0b-b98c71b79d26",
+		"name": "Ticket Management System API",
+		"description": "Complete API collection for Ticket Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "47191261",
+		"_collection_link": "https://science-technologist-84715678-5125305.postman.co/workspace/V2SONNN~93c6eebd-2b59-4e20-9bd9-819b2b07c7fb/collection/47191261-95e6c48e-aee4-46e9-bc0b-b98c71b79d26?action=share&source=collection_link&creator=47191261"
+	},
+	"item": [
+		{
+			"name": "00 - Quick Setup",
+			"item": [
+				{
+					"name": "1. Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/utility/health"
+					},
+					"response": []
+				},
+				{
+					"name": "2. Initialize Database",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{baseUrl}}/api/tickets/debug/seed-data"
+					},
+					"response": []
+				},
+				{
+					"name": "3. Verify Setup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/tickets/debug/database"
+					},
+					"response": []
+				},
+				{
+					"name": "4. Ping Test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/ping"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "01 - Customers",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test Customer\",\n  \"email\": \"customer_{{$timestamp}}@test.com\",\n  \"phone\": \"05551234567\"\n}"
+						},
+						"url": "{{baseUrl}}/api/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "List Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/customers?page=0&size=10&sort=createdAt,desc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt,desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/customers/{{customerId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Customer Name\",\n  \"email\": \"updated@example.com\",\n  \"phone\": \"05559876543\"\n}"
+						},
+						"url": "{{baseUrl}}/api/customers/{{customerId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Customer by Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/customers/search?email={{testEmail}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"search"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "{{testEmail}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseUrl}}/api/customers/{{customerId}}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "02 - Representatives",
+			"item": [
+				{
+					"name": "Create Representative",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Support Agent\",\n  \"email\": \"agent_{{$timestamp}}@company.com\",\n  \"phone\": \"05321234567\"\n}"
+						},
+						"url": "{{baseUrl}}/api/representatives"
+					},
+					"response": []
+				},
+				{
+					"name": "List Representatives",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/representatives?page=0&size=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"representatives"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Representative by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/representatives/{{agentId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Representative",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Agent Name\",\n  \"email\": \"updated_agent@company.com\",\n  \"phone\": \"05329876543\"\n}"
+						},
+						"url": "{{baseUrl}}/api/representatives/{{agentId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Agent Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/representatives/{{agentId}}/dashboard"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Representative",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseUrl}}/api/representatives/{{agentId}}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "03 - Tickets",
+			"item": [
+				{
+					"name": "Create Ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerId\": {{customerId}},\n  \"title\": \"Internet Connection Problem\",\n  \"description\": \"My internet connection keeps dropping every few minutes. I have tried restarting the modem multiple times but the issue persists.\",\n  \"priorityId\": {{priorityNormal}}\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets"
+					},
+					"response": []
+				},
+				{
+					"name": "List All Tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/tickets?page=0&size=10&sort=createdAt,desc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt,desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ticket by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Ticket to Agent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"agentId\": {{agentId}},\n  \"note\": \"Assigned to experienced network specialist\"\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/assign"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ticket Status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/status/{{statusInProgress}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Close Ticket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/close"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "04 - Messages",
+			"item": [
+				{
+					"name": "Send Customer Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"senderId\": {{customerId}},\n  \"message\": \"The problem is still continuing. Please help urgently!\"\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/messages"
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Reply to Agent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"senderId\": {{customerId}},\n  \"message\": \"My modem model is XYZ-123. I bought it last year.\"\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/messages"
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Confirmation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"senderId\": {{customerId}},\n  \"message\": \"I restarted the modem and it's working now! Thank you so much!\"\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/messages"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ticket Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/messages"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "05 - Agent Operations",
+			"item": [
+				{
+					"name": "Get Unassigned Tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/representatives/tickets/unassigned?page=0&size=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"representatives",
+								"tickets",
+								"unassigned"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Agent Tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/representatives/{{agentId}}/tickets?page=0&size=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"representatives",
+								"{{agentId}}",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Self Assign Ticket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{baseUrl}}/api/representatives/{{agentId}}/tickets/{{ticketId}}/assign"
+					},
+					"response": []
+				},
+				{
+					"name": "Agent Reply to Ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"agentId\": {{agentId}},\n  \"message\": \"I have identified the problem. Working on the solution now.\",\n  \"newStatusId\": {{statusInProgress}},\n  \"isInternal\": false\n}"
+						},
+						"url": "{{baseUrl}}/api/representatives/{{agentId}}/tickets/{{ticketId}}/reply"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Internal Note",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"agentId\": {{agentId}},\n  \"message\": \"INTERNAL NOTE: Customer seems frustrated. Handle with care.\",\n  \"isInternal\": true\n}"
+						},
+						"url": "{{baseUrl}}/api/representatives/{{agentId}}/tickets/{{ticketId}}/reply"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status with Note",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/representatives/{{agentId}}/tickets/{{ticketId}}/status?statusId={{statusInProgress}}&note=Working on the solution",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"representatives",
+								"{{agentId}}",
+								"tickets",
+								"{{ticketId}}",
+								"status"
+							],
+							"query": [
+								{
+									"key": "statusId",
+									"value": "{{statusInProgress}}"
+								},
+								{
+									"key": "note",
+									"value": "Working on the solution"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close Ticket with Note",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/representatives/{{agentId}}/tickets/{{ticketId}}/close?closeNote=Issue resolved successfully",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"representatives",
+								"{{agentId}}",
+								"tickets",
+								"{{ticketId}}",
+								"close"
+							],
+							"query": [
+								{
+									"key": "closeNote",
+									"value": "Issue resolved successfully"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "06 - Complete Workflow",
+			"item": [
+				{
+					"name": "Step 1-Create Agent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Support Agent\",\n  \"email\": \"agent_{{$timestamp}}@company.com\",\n  \"phone\": \"05321234567\"\n}"
+						},
+						"url": "{{baseUrl}}/api/representatives"
+					},
+					"response": []
+				},
+				{
+					"name": "Step 2- Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Workflow Test Customer\",\n  \"email\": \"workflow_{{$timestamp}}@test.com\",\n  \"phone\": \"{{testPhone}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "Step 3 - Create Ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerId\": {{customerId}},\n  \"title\": \"Workflow Test Ticket\",\n  \"description\": \"This is a test ticket for complete workflow testing\",\n  \"priorityId\": {{priorityHigh}}\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets"
+					},
+					"response": []
+				},
+				{
+					"name": "Step 4- Assign to Agent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"agentId\": {{agentId}},\n  \"note\": \"High priority ticket\"\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/assign"
+					},
+					"response": []
+				},
+				{
+					"name": "Step 5 - Customer Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"senderId\": {{customerId}},\n  \"message\": \"Please solve this urgently\"\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/messages"
+					},
+					"response": []
+				},
+				{
+					"name": "Step 6 - Agent Reply",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"agentId\": {{agentId}},\n  \"message\": \"Working on your issue. Can you provide more details?\",\n  \"newStatusId\": {{statusInProgress}},\n  \"isInternal\": false\n}"
+						},
+						"url": "{{baseUrl}}/api/representatives/{{agentId}}/tickets/{{ticketId}}/reply"
+					},
+					"response": []
+				},
+				{
+					"name": "Step 7- Customer Reply Back",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"senderId\": {{customerId}},\n  \"message\": \"The issue started yesterday. When will it be fixed?\"\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/messages"
+					},
+					"response": []
+				},
+				{
+					"name": "Step 8 - Agent Final Reply",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"agentId\": {{agentId}},\n  \"message\": \"The issue has been resolved. Please check now.\",\n  \"isInternal\": false\n}"
+						},
+						"url": "{{baseUrl}}/api/representatives/{{agentId}}/tickets/{{ticketId}}/reply"
+					},
+					"response": []
+				},
+				{
+					"name": "Step 9 - Customer Confirmation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"senderId\": {{customerId}},\n  \"message\": \"Yes, it's working now. Thank you!\"\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets/{{ticketId}}/messages"
+					},
+					"response": []
+				},
+				{
+					"name": "Step 10 - Close Ticket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/representatives/{{agentId}}/tickets/{{ticketId}}/close?closeNote=Issue resolved and confirmed by customer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"representatives",
+								"{{agentId}}",
+								"tickets",
+								"{{ticketId}}",
+								"close"
+							],
+							"query": [
+								{
+									"key": "closeNote",
+									"value": "Issue resolved and confirmed by customer"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "07 - Validation Tests",
+			"item": [
+				{
+					"name": "Invalid Email Format",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"invalid-email\",\n  \"phone\": \"1234\"\n}"
+						},
+						"url": "{{baseUrl}}/api/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "Short Ticket Title",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerId\": {{customerId}},\n  \"title\": \"Hi\",\n  \"description\": \"This description is long enough but title is too short\",\n  \"priorityId\": {{priorityNormal}}\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets"
+					},
+					"response": []
+				},
+				{
+					"name": "Non-existent Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/customers/999999"
+					},
+					"response": []
+				},
+				{
+					"name": "Non-existent Ticket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/tickets/999999"
+					},
+					"response": []
+				},
+				{
+					"name": "Duplicate Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Duplicate Test\",\n  \"email\": \"{{testEmail}}\",\n  \"phone\": \"{{testPhone}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/customers"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "08 - Debug Endpoints",
+			"item": [
+				{
+					"name": "Test Endpoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/tickets/test"
+					},
+					"response": []
+				},
+				{
+					"name": "Simple Create Test",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{baseUrl}}/api/tickets/debug/simple-create"
+					},
+					"response": []
+				},
+				{
+					"name": "Raw Request Test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"test\": \"data\",\n  \"debug\": true,\n  \"timestamp\": \"{{$timestamp}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/tickets/debug/raw"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "customerId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "agentId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "ticketId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "statusOpen",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "statusAssigned",
+			"value": "2",
+			"type": "string"
+		},
+		{
+			"key": "statusInProgress",
+			"value": "3",
+			"type": "string"
+		},
+		{
+			"key": "statusClosed",
+			"value": "4",
+			"type": "string"
+		},
+		{
+			"key": "priorityLow",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "priorityNormal",
+			"value": "2",
+			"type": "string"
+		},
+		{
+			"key": "priorityHigh",
+			"value": "3",
+			"type": "string"
+		},
+		{
+			"key": "priorityUrgent",
+			"value": "4",
+			"type": "string"
+		},
+		{
+			"key": "testEmail",
+			"value": "test@example.com",
+			"type": "string"
+		},
+		{
+			"key": "testPhone",
+			"value": "05551234567",
+			"type": "string"
+		}
+	]
+}
